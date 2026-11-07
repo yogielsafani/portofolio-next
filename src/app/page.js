@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import SkillCard from "@/components/SkillCard";
-import { proyek } from "@/data/proyek"
 import ProyekCard from "@/components/ProyekCard";
+import { proyek } from "@/data/proyek";
 
 const skills = [
   { nama: "HTML", level: "Menengah" },
@@ -23,7 +23,7 @@ export default function Home() {
       />
 
       <section id="keahlian">
-        <h2 className="mb-4 text-2xl font-bold text-utama">Keahlian</h2>
+        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-sky-200">Keahlian</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {skills.map((skill) => (
             <SkillCard
@@ -36,7 +36,7 @@ export default function Home() {
       </section>
 
       <section className="mt-10">
-        <h2 className="mb-4 text-2xl font-bold text-utama">Proyek Terbaru</h2>
+        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-sky-200">Proyek Terbaru</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {proyekTerbaru.map((item) => (
             <ProyekCard key={item.slug} proyek={item} />

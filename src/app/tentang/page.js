@@ -41,16 +41,16 @@ const jadwal = [
 return (
   <main className="mx-auto max-w-5xl space-y-6 px-4 py-10">
 
- <h2 className="mb-4 text-2xl font-bold text-utama">Tentang Saya</h2>
+ <h2 className="mb-4 text-2xl font-bold text-utama dark:text-sky-200">Tentang Saya</h2>
         <Kartu judul="Perkenalan">
-          <p className="text-gray-700">
+          <p className="text-gray-700 dark:text-gray-300">
             Saya adalah pelajar SMKN 1 Kepanjen yang sedang mempelajari dan mencoba memahami web development di kelas maupun di dunia industry, dengan mengikuti kelas industri saya bisa mengikuti proyek/tugas yang di sesuaikan oleh industri yang di berikan oleh PT Ubig
           </p>
         </Kartu>
   
         <div className="grid gap-6 md:grid-cols-2">
           <Kartu judul="Hobi">
-            <ul className="list-disc pl-5 text-gray-700">
+            <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300">
               {hobi.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -58,7 +58,7 @@ return (
           </Kartu>
   
           <Kartu judul="Cita-cita">
-            <ol className="list-decimal pl-5 text-gray-700">
+            <ol className="list-decimal pl-5 text-gray-700 dark:text-gray-300">
               {rencana.map((item) => (
                 <li key={item}>{item}</li>
               ))}
