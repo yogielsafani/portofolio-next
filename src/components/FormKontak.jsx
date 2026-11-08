@@ -6,41 +6,36 @@ const kelasInput =
   "mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 focus:border-utama dark:focus:border-sky-200 focus:outline-none";
 
 export default function FormKontak() {
-  const [form, setForm] = useState({
-    nama: "",
-    email: "",
-    tel: "",
-    subjects: "",
-    pesan: "",
-  });
+  const [nama, setNama] = useState("");
+  const [email, setEmail] = useState("");
+  const [hp, setHp] = useState("");
+  const [keperluan, setKeperluan] = useState("");
+  const [pesan, setPesan] = useState("");
   const [error, setError] = useState({});
-
-  function ubahForm(e) {
-    const { name, value } = e.target;
-    setForm((formSaatIni) => ({ ...formSaatIni, [name]: value }));
-  }
+  const [berhasil, setBerhasil] = useState(false);
 
   function kirim(e) {
     e.preventDefault();
     const errorBaru = {};
 
-    if (form.nama.trim() === "") {
+    if (nama.trim() === "") {
       errorBaru.nama = "Nama wajib diisi.";
     }
-    if (!form.email.includes("@")) {
+    if (!email.includes("@")) {
       errorBaru.email = "Email harus memuat tanda @, contoh nama@gmail.com.";
     }
-    if (form.tel.trim() === "") {
-      errorBaru.tel = "Nomor HP wajib diisi.";
+    if (hp.length < 10) {
+      errorBaru.hp = "Nomor HP minimal 10 angka.";
     }
-    if (form.subjects === "") {
-      errorBaru.subjects = "Silakan pilih keperluan.";
+    if (keperluan === "") {
+      errorBaru.keperluan = "Pilih salah satu keperluan.";
     }
-    if (form.pesan.trim() === "") {
-      errorBaru.pesan = "Pesan wajib diisi.";
+    if (pesan.trim().length < 10) {
+      errorBaru.pesan = "Pesan minimal 10 karakter.";
     }
 
     setError(errorBaru);
+    setBerhasil(Object.keys(errorBaru).length === 0);
   }
 
   return (
@@ -53,8 +48,8 @@ export default function FormKontak() {
           type="text"
           id="nama"
           name="nama"
-          value={form.nama}
-          onChange={ubahForm}
+          value={nama}
+          onChange={(e) => setNama(e.target.value)}
           placeholder="Contoh: Budi Santoso"
           className={kelasInput}
         />
@@ -69,8 +64,8 @@ export default function FormKontak() {
           type="email"
           id="email"
           name="email"
-          value={form.email}
-          onChange={ubahForm}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Contoh: budi@email.com"
           className={kelasInput}
         />
@@ -78,38 +73,39 @@ export default function FormKontak() {
       </div>
 
       <div>
-        <label htmlFor="tel" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="hp" className="block font-semibold text-utama dark:text-sky-200">
           Nomor Hp
         </label>
         <input
           type="tel"
-          id="tel"
-          name="tel"
-          value={form.tel}
-          onChange={ubahForm}
+          id="hp"
+          name="hp"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
           placeholder="08123456789"
           className={kelasInput}
         />
-        {error.tel && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.tel}</p>}
+        {error.hp && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.hp}</p>}
       </div>
 
       <div>
-        <label htmlFor="subjects" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="keperluan" className="block font-semibold text-utama dark:text-sky-200">
           Keperluan
         </label>
         <select
-          name="subjects"
-          id="subjects"
-          value={form.subjects}
-          onChange={ubahForm}
+          id="keperluan"
+          name="keperluan"
+          value={keperluan}
+          onChange={(e) => setKeperluan(e.target.value)}
           className={kelasInput}
         >
-          <option value="">-- Pilih Keperluan --</option>
-          <option value="kerjasama">Kerjasama / Proyek</option>
-          <option value="pertanyaan">Pertanyaan Umum</option>
+          <option value="">-- Pilih keperluan --</option>
+          <option value="bertanya">Bertanya</option>
+          <option value="kerja-sama">Kerja sama proyek</option>
+          <option value="lainnya">Lainnya</option>
         </select>
-        {error.subjects && (
-          <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.subjects}</p>
+        {error.keperluan && (
+          <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.keperluan}</p>
         )}
       </div>
 
@@ -121,8 +117,8 @@ export default function FormKontak() {
           id="pesan"
           name="pesan"
           rows={5}
-          value={form.pesan}
-          onChange={ubahForm}
+          value={pesan}
+          onChange={(e) => setPesan(e.target.value)}
           placeholder="Tulis pesan Anda di sini..."
           className={kelasInput}
         />
@@ -136,10 +132,16 @@ export default function FormKontak() {
         Kirim
       </button>
 
-      <p className="text-sm leading-6 text-slate-500">
+      <p className="text-sm leading-6 text-slate-500 dark:text-gray-400">
         Form ini belum mengirim pesan. Pengiriman pesan akan diaktifkan pada
         tahap berikutnya.
       </p>
+
+      {berhasil && (
+        <p className="rounded-lg bg-green-100 p-3 text-green-800 dark:bg-green-900 dark:text-green-100" role="status">
+          Terima kasih, {nama}! Pesanmu sudah lolos pemeriksaan.
+        </p>
+      )}
     </form>
   );
 }
