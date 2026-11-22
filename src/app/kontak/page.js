@@ -1,4 +1,5 @@
 import FormKontak from "@/components/FormKontak";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata = {
   title: "Kontak",
@@ -19,31 +20,39 @@ export default function Kontak() {
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-        <section className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-          <FormKontak />
-        </section>
+      <div className="grid gap-6 md:grid-cols-3">
+        <Card className="md:col-span-2">
+          <CardContent>
+            <FormKontak />
+          </CardContent>
+        </Card>
 
-        <aside className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-primary">Temukan Saya di</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">
+              Temukan Saya di
+            </CardTitle>
+          </CardHeader>
 
-          <div className="mt-4 space-y-3 text-sm text-aksen">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noreferrer"
-              className="block hover:underline"
-            >
-              GitHub →
-            </a>
-            <a
-              href="mailto:yelsrplkanesa@gmail.com"
-              className="block break-words hover:underline"
-            >
-              yelsrplkanesa@gmail.com
-            </a>
-          </div>
-        </aside>
+          <CardContent>
+            <div className="space-y-3 text-sm text-aksen">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className="block hover:underline"
+              >
+                GitHub →
+              </a>
+              <a
+                href="mailto:yelsrplkanesa@gmail.com"
+                className="block break-words hover:underline"
+              >
+                yelsrplkanesa@gmail.com
+              </a>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </main>
   );

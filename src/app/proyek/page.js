@@ -1,5 +1,6 @@
 import FilterProyek from "@/components/FilterProyek";
 import { supabase } from "@/lib/supabase";
+import { lengkapiKategori } from "@/data/proyek";
 
 export const metadata = {
     title: "Proyek",
@@ -10,7 +11,8 @@ export default async function DaftarProyek() {
     const { data: proyek, error } = await supabase
       .from("projects")
       .select("*")
-      .order("created_at");
+      .order("minggu", { ascending: true });
+    const daftarProyek = lengkapiKategori(proyek ?? []);
 
     return (
         <main className="mx-auto w-full max-w-5xl px-4 py-10">
@@ -25,14 +27,13 @@ export default async function DaftarProyek() {
                     Data proyek gagal di muat: {error.message}
                 </p>
             )}
-            {proyek && proyek.length === 0 && (
+            {!error && daftarProyek.length === 0 && (
                 <p className="mt-8 rounded-xl border border-dashed border-
                 input p-6 text-center text-muted-foreground">
                         Belum ada proyek di database
                 </p>
             )}
-            {proyek && proyek.length > 0 && <FilterProyek
-            proyek={proyek} />}
+            {daftarProyek.length > 0 && <FilterProyek proyek={daftarProyek} />}
         </main>
     );
 }

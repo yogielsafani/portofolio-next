@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator"
 import { supabase } from "@/lib/supabase";
+import { lengkapiKategori } from "@/data/proyek";
 
 async function ambilProyek(slug) {
     const { data } = await supabase
@@ -11,7 +12,7 @@ async function ambilProyek(slug) {
      .select("*")
      .eq("slug", slug)
      .single();
-    return data;
+    return data ? lengkapiKategori([data])[0] : null;
 }
 
 export async function generateMetadata({ params }) {
@@ -38,8 +39,22 @@ export default async function DetailProyek ({ params }) {
             &larr; Kembali ke daftar proyek
             </Link>
             <h1 className="mt-4 text-3xl font-bold text-primary md:text-4xl">{item.judul}</h1>
-            <div className="mt-3 flex items-center gap-3">
-                <Badge>{item.kategori}</Badge>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+                {[item.kategori, item.kategori2, item.kategori3]
+                    .filter(Boolean)
+                    .map((kategori) => {
+                        const variant = {
+                            HTML: "html",
+                            CSS: "css",
+                            JavaScript: "javascript",
+                        }[kategori] ?? "secondary";
+
+                        return (
+                            <Badge key={kategori} variant={variant}>
+                                {kategori}
+                            </Badge>
+                        );
+                    })}
                 <span className="text-muted-foreground">Dibuat di {item.minggu}</span>
             </div>
             <Image

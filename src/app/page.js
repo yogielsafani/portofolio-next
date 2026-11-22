@@ -1,24 +1,23 @@
+
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import SkillCard from "@/components/SkillCard";
 import ProyekCard from "@/components/ProyekCard";
 import { buttonVariants } from "@/components/ui/button"
 import { supabase } from "@/lib/supabase";
-
-const skills = [
-  { nama: "HTML", level: "Menengah" },
-  { nama: "CSS", level: "Menengah" },
-  { nama: "Git dan Github", level: "Dasar" },
-  { nama: "Desain Poster dengan Canva", level: "Mahir" },
-  { nama: "JavaScript", level: "Dasar" },
-];
+import { lengkapiKategori } from "@/data/proyek";
 
 export default async function Home() {
+  const { data: skills } = await supabase
+    .from("skills")
+    .select("*")
+    .order("id");
   const { data: proyekTerbaru, error } = await supabase
     .from("projects")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("minggu", { ascending: true })
     .limit(3);
+  const daftarProyek = lengkapiKategori(proyekTerbaru ?? []);
     
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-4 py-10">
@@ -46,7 +45,7 @@ export default async function Home() {
           <p className="text-aksen">Data proyek gagal dimuat: {error.message}</p>
         ) : (
           <div className="grid gap-6 md:grid-cols-3">
-            {proyekTerbaru?.map((item) => (
+            {daftarProyek.map((item) => (
               <ProyekCard key={item.slug} proyek={item} />
             ))}
           </div>

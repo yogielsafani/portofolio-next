@@ -43,5 +43,22 @@ export const proyek = [
         ],
     },
 ];
-    
-    
+
+export function lengkapiKategori(proyekDatabase) {
+    const kategoriLokal = new Map(
+        proyek.map(({ slug, kategori2, kategori3 }) => [
+            slug,
+            { kategori2, kategori3 },
+        ])
+    );
+
+    return proyekDatabase.map((item) => {
+        const kategori = kategoriLokal.get(item.slug);
+
+        return {
+            ...item,
+            kategori2: item.kategori2 ?? kategori?.kategori2,
+            kategori3: item.kategori3 ?? kategori?.kategori3,
+        };
+    });
+}
