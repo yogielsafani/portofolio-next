@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const kelasInput =
-  "mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 focus:border-utama dark:focus:border-sky-200 focus:outline-none";
+  "mt-1 w-full rounded-lg border border-input bg-card p-3 focus:border-primary focus:outline-none";
 
 export default function FormKontak() {
   const [nama, setNama] = useState("");
@@ -41,7 +41,7 @@ export default function FormKontak() {
   return (
     <form onSubmit={kirim} noValidate className="space-y-4">
       <div>
-        <label htmlFor="nama" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="nama" className="block font-semibold text-primary">
           Nama Lengkap
         </label>
         <input
@@ -53,11 +53,11 @@ export default function FormKontak() {
           placeholder="Contoh: Budi Santoso"
           className={kelasInput}
         />
-        {error.nama && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.nama}</p>}
+        {error.nama && <p className="mt-1 text-sm text-aksen">{error.nama}</p>}
       </div>
 
       <div>
-        <label htmlFor="email" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="email" className="block font-semibold text-primary">
           Email
         </label>
         <input
@@ -69,11 +69,11 @@ export default function FormKontak() {
           placeholder="Contoh: budi@email.com"
           className={kelasInput}
         />
-        {error.email && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.email}</p>}
+        {error.email && <p className="mt-1 text-sm text-aksen">{error.email}</p>}
       </div>
 
       <div>
-        <label htmlFor="hp" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="hp" className="block font-semibold text-primary">
           Nomor Hp
         </label>
         <input
@@ -85,11 +85,11 @@ export default function FormKontak() {
           placeholder="08123456789"
           className={kelasInput}
         />
-        {error.hp && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.hp}</p>}
+        {error.hp && <p className="mt-1 text-sm text-aksen">{error.hp}</p>}
       </div>
 
       <div>
-        <label htmlFor="keperluan" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="keperluan" className="block font-semibold text-primary">
           Keperluan
         </label>
         <select
@@ -105,12 +105,12 @@ export default function FormKontak() {
           <option value="lainnya">Lainnya</option>
         </select>
         {error.keperluan && (
-          <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.keperluan}</p>
+          <p className="mt-1 text-sm text-aksen">{error.keperluan}</p>
         )}
       </div>
 
       <div>
-        <label htmlFor="pesan" className="block font-semibold text-utama dark:text-sky-200">
+        <label htmlFor="pesan" className="block font-semibold text-primary">
           Pesan
         </label>
         <textarea
@@ -122,17 +122,17 @@ export default function FormKontak() {
           placeholder="Tulis pesan Anda di sini..."
           className={kelasInput}
         />
-        {error.pesan && <p className="mt-1 text-sm text-aksen dark:text-red-300">{error.pesan}</p>}
+        {error.pesan && <p className="mt-1 text-sm text-aksen">{error.pesan}</p>}
       </div>
 
       <button
         type="submit"
-        className="rounded-lg bg-aksen px-5 py-3 font-semibold text-white transition-colors hover:bg-red-800 focus-visible:outline-offset-2 focus-visible:outline-aksen"
+        className="rounded-lg bg-primary px-5 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         Kirim
       </button>
 
-      <p className="text-sm leading-6 text-slate-500 dark:text-gray-400">
+      <p className="text-sm leading-6 text-muted-foreground">
         Form ini belum mengirim pesan. Pengiriman pesan akan diaktifkan pada
         tahap berikutnya.
       </p>

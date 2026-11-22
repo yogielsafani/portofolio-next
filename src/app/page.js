@@ -2,7 +2,8 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import SkillCard from "@/components/SkillCard";
 import ProyekCard from "@/components/ProyekCard";
-import { proyek } from "@/data/proyek";
+import { buttonVariants } from "@/components/ui/button"
+import { supabase } from "@/lib/supabase";
 
 const skills = [
   { nama: "HTML", level: "Menengah" },
@@ -12,9 +13,13 @@ const skills = [
   { nama: "JavaScript", level: "Dasar" },
 ];
 
-const proyekTerbaru = proyek.slice(-3);
-
-export default function Home() {
+export default async function Home() {
+  const { data: proyekTerbaru, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(3);
+    
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-4 py-10">
       <Hero
@@ -23,7 +28,7 @@ export default function Home() {
       />
 
       <section id="keahlian">
-        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-sky-200">Keahlian</h2>
+        <h2 className="mb-4 text-2xl font-bold text-primary">Keahlian</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {skills.map((skill) => (
             <SkillCard
@@ -36,15 +41,19 @@ export default function Home() {
       </section>
 
       <section className="mt-10">
-        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-sky-200">Proyek Terbaru</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {proyekTerbaru.map((item) => (
-            <ProyekCard key={item.slug} proyek={item} />
-          ))}
-        </div>
+        <h2 className="mb-4 text-2xl font-bold text-primary">Proyek Terbaru</h2>
+        {error ? (
+          <p className="text-aksen">Data proyek gagal dimuat: {error.message}</p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-3">
+            {proyekTerbaru?.map((item) => (
+              <ProyekCard key={item.slug} proyek={item} />
+            ))}
+          </div>
+        )}
         <Link
           href="/proyek"
-          className="mt-6 inline-block rounded-lg bg-utama px-5 py-2 font-semibold text-white"
+          className={buttonVariants({ size: "lg", className: "mt-6"})}
         >
           Lihat semua proyek
         </Link>

@@ -9,10 +9,10 @@ export default function Kontak() {
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-10">
       <div className="mb-8">
-        <h1 className="mt-2 text-3xl font-bold text-utama dark:text-sky-200 md:text-4xl">
+        <h1 className="mt-2 text-3xl font-bold text-primary md:text-4xl">
           Hubungi Saya
         </h1>
-        <p className="mt-3 max-w-2xl text-gray-700 dark:text-gray-300">
+        <p className="mt-3 max-w-2xl text-muted-foreground">
           Saya terbuka untuk kolaborasi, pertanyaan, maupun tawaran proyek baru.
           Silakan kirim pesan melalui form di samping atau hubungi saya lewat media
           sosial yang tersedia.
@@ -20,14 +20,14 @@ export default function Kontak() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-        <section className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-sm">
+        <section className="rounded-2xl border border-border bg-card p-6 shadow-sm">
           <FormKontak />
         </section>
 
-        <aside className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-utama dark:text-sky-200">Temukan Saya di</h2>
+        <aside className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-primary">Temukan Saya di</h2>
 
-          <div className="mt-4 space-y-3 text-sm text-aksen dark:text-red-300">
+          <div className="mt-4 space-y-3 text-sm text-aksen">
             <a
               href="https://github.com"
               target="_blank"

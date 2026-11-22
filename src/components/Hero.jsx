@@ -14,19 +14,19 @@ export default function Hero({ nama, tagline }) {
               className="rounded-full border-4 border-aksen"
               />
               <div>
-                <h1 className="text-3xl font-bold text-utama dark:text-sky-200
+                <h1 className="text-3xl font-bold text-[var(--primary)]
                 md:text-5xl">Halo, saya {nama}</h1>
-                <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">{tagline}</p>
+                <p className="mt-3 text-lg text-muted-foreground">{tagline}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                     <Link
                       href="/tentang"
-                      className="rounded-lg bg-aksen px-5 py-2.5 font-semibold text-white"
+                      className="rounded-lg bg-[var(--primary)] px-5 py-2.5 font-semibold text-[var(--primary-foreground)] transition-colors hover:brightness-90"
                     >
                       Tentang saya
                     </Link>
                     <Link
                       href="/#keahlian"
-                      className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-5 py-2.5 font-semibold text-utama dark:text-sky-200"
+                      className="rounded-lg border border-input bg-card px-5 py-2.5 font-semibold text-primary"
                     >
                       Lihat keahlian
                     </Link>
